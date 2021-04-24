@@ -9,7 +9,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Katchymemes',
       debugShowCheckedModeBanner: false,
-      home: HomeScreen(),
+      home: Home(),
     );
   }
 }
