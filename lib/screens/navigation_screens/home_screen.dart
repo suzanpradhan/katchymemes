@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:katchymemes/screens/tab_screens/invite_screen.dart';
+import 'package:katchymemes/screens/tab_screens/recent_screen.dart';
+import 'package:katchymemes/screens/tab_screens/trending_screen.dart';
 import 'package:katchymemes/widgets/header.dart';
 import 'package:katchymemes/widgets/tab_items.dart';
 
@@ -11,27 +14,16 @@ class _HomeScreenState extends State<HomeScreen>  with TickerProviderStateMixin{
 
   TabController _tabController;
 
-  List<Widget> _tabs = <Widget>[
-     Tab(
-      child: TabItem(
-        title: "Recent",
-      ),
-    ),
-    Tab(
-      child: TabItem(
-        title: "Trending",
-      ),
-    ),
-    Tab(
-      child: TabItem(
-        title: "Invite",
-      ),
-    ),
-  ];
-
   void initState(){
     super.initState();
     _tabController = TabController(length: 3, vsync: this);
+    _tabController.addListener(handleTabSelection);
+  }
+
+  void handleTabSelection(){
+    setState(() {
+      
+    });
   }
   
   @override
@@ -44,8 +36,27 @@ class _HomeScreenState extends State<HomeScreen>  with TickerProviderStateMixin{
           width: size.width,
           child: TabBar(
             controller: _tabController,
-            tabs: _tabs,
-            indicatorPadding: EdgeInsets.fromLTRB(10.0, 5.0, 10.0, 5.0),
+            tabs: [
+              Tab(
+                child: TabItem(
+                  title: "Recent",
+                  color: _tabController.index == 0 ? Colors.white : Colors.black,
+                ),
+              ),
+              Tab(
+                child: TabItem(
+                  title: "Trending",
+                  color: _tabController.index == 1 ? Colors.white : Colors.black
+                ),
+              ),
+              Tab(
+                child: TabItem(
+                  title: "Invite",
+                  color: _tabController.index == 2 ? Colors.white : Colors.black
+                ),
+              ),
+            ],
+            indicatorPadding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
             indicator: BoxDecoration(
               color: Colors.pink,
               borderRadius: BorderRadius.circular(25.0),
@@ -56,9 +67,9 @@ class _HomeScreenState extends State<HomeScreen>  with TickerProviderStateMixin{
           child: TabBarView(
             controller: _tabController,
             children: [
-              Center(child: Text("Page One")),
-              Center(child: Text("Page Two")),
-              Center(child: Text("Page Three")),
+              RecentTab(),
+              TrendingTab(),
+              InviteTab(),
             ],
           )
         )

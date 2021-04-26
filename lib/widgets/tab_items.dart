@@ -3,10 +3,12 @@ import 'package:flutter/material.dart';
 class TabItem extends StatelessWidget {
   const TabItem({
     Key key,
+    this.color,
     @required this.title,
   }) : super(key: key);
 
   final String title;
+  final Color color;
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +23,7 @@ class TabItem extends StatelessWidget {
         title,
         textAlign: TextAlign.center,
         style: TextStyle(
-          color: Colors.black,
+          color: color,
         ),
       ),
     );
