@@ -10,11 +10,13 @@ class PostCard extends StatelessWidget {
     this.imageUrl, 
     this.likeCount, 
     this.commentCount, 
-    this.userImage,
+    this.userImage, 
+    this.onPress,
   }) : super(key: key);
 
   final String username, time, imageUrl, userImage;
   final int likeCount, commentCount;
+  final Function onPress;
 
   @override
   Widget build(BuildContext context) {
@@ -28,10 +30,13 @@ class PostCard extends StatelessWidget {
                   padding: EdgeInsets.all(10.0),
                   child: PostHeader(userImage: userImage, username: username, time: time),
                 ),
-                Container(
-                  child: Image(
-                    image: NetworkImage(
-                      imageUrl
+                GestureDetector(
+                  onTap: onPress,
+                  child: Container(
+                    child: Image(
+                      image: NetworkImage(
+                        imageUrl
+                      ),
                     ),
                   ),
                 ),

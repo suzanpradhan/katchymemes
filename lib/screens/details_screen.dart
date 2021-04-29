@@ -1,123 +1,138 @@
+import 'dart:ui';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';
-import 'package:katchymemes/models/comments_model.dart';
+import 'package:katchymemes/models/posts_model.dart';
+import 'package:katchymemes/screens/home.dart';
+import 'package:katchymemes/screens/tab_screens/recent_screen.dart';
+import 'package:katchymemes/widgets/custom_stack.dart';
 
-class DetailScreen extends StatefulWidget {
-  @override
-  _DetailScreenState createState() => _DetailScreenState();
-}
+class DetailScreen extends StatelessWidget {
 
-class _DetailScreenState extends State<DetailScreen> {
+  final Post post;
 
-  final comments = Comments.fetchAll();
+  DetailScreen(this.post);
 
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-    return Container(
-      child: Column(
-        children: [
-          Stack(
-            children: [
-              Container(
-                width: size.width,
-                height: size.height * 0.3,
-                child: Image(
-                  fit: BoxFit.cover,
-                  image: NetworkImage(
-                    "https://images.pexels.com/photos/325185/pexels-photo-325185.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
-                  )
+    return SafeArea(
+      child: Scaffold(
+        body: Column(
+          children: [
+            CustomStack(
+              imageUrl: post.postImage,
+              left: 20.0,
+              top: 20.0,
+              icon: EvaIcons.arrowIosBackOutline,
+              onTap: (){
+                Navigator.push(context, MaterialPageRoute(builder: (context) => Home()));
+              },
+            ),
+            Container(
+              padding: EdgeInsets.all(20.0),
+              child: ListTile(
+                leading: CircleAvatar(
+                    backgroundImage: CachedNetworkImageProvider(
+                    post.userImage
+                  ),
+                ),
+                title: Text(post.username),
+                subtitle: Text(post.postedDate),
+                trailing: TextButton(
+                  child: Text("Follow"),
+                  style: TextButton.styleFrom(
+                    backgroundColor: Colors.pink,
+                    primary: Colors.white,
+                    onSurface: Colors.grey,
+                  ),
+                  onPressed: (){
+                    print("follow");
+                  },
                 ),
               ),
-              Positioned(
-                top: 20.0,
-                left: 20.0,
-                child: Container(
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(10.0)
-                  ),
-                  child: IconButton(
-                    icon: Icon(EvaIcons.arrowIosBackOutline),
-                    onPressed: (){},
-                  ),
-                )
-              )
-            ],
-          ),
-          Expanded(
-            child: Container(
-              padding: EdgeInsets.all(20.0),
-              child: Column(
-                children: [
-                  ListTile(
-                    leading: CircleAvatar(
-                        backgroundImage: CachedNetworkImageProvider(
-                        "https://images.pexels.com/photos/38275/anonymous-studio-figure-photography-facial-mask-38275.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
-                      ),
-                    ),
-                    title: Text("bishal_magar"),
-                    subtitle: Text("19min ago"),
-                    trailing: TextButton(
-                      child: Text("Follow"),
-                      style: TextButton.styleFrom(
-                        backgroundColor: Colors.pink,
-                        primary: Colors.white,
-                        onSurface: Colors.grey,
-                      ),
-                      onPressed: (){
-                        print("follow");
-                      },
-                    ),
-                  ),
-                  Container(
-                    padding: EdgeInsets.all(20.0),
-                    child: Text(
-                     "Lorem Ipsum is simply dummy text of the printing and typ industry. Lorem Ipsum has been the industry's standard dummy t ever since the 1500s, when an unknown printer took a galley of type  only five centuries, but also the leap into electronic typesetting"
-                    ),
-                  ),
-                  Container(
-                    padding: EdgeInsets.symmetric(
-                      horizontal: 20.0,
-                      vertical: 10.0,
-                    ),
-                    child: Column(
-                      children: [
-                        Text(
-                          "Comments",
-                          textAlign: TextAlign.left,
-                        ),
-                       Expanded(
-                        child: Container(
-                          child: ListView.builder(
-                             itemCount: comments.length,
-                             itemBuilder: (context, index){
-                               return  Padding(
-                              padding: EdgeInsets.all(20.0),
-                                child: Row(
-                                  children: [
-                                    CircleAvatar(
-                                      child: CachedNetworkImage(
-                                        imageUrl: comments[index].userImage
-                                      ),
-                                    )
-                                  ],
-                                ),
-                              );
-                             }
-                           ),
-                         ),
-                       ),
-                      ],
-                    ),
-                  ),
-                ],
+            ),
+            Container(
+              padding: EdgeInsets.symmetric(
+                horizontal: 40.0,
+                vertical: 10.0
+              ),
+              width: size.width,
+              child: Text(
+                post.postText,
+                textAlign: TextAlign.left,
               ),
             ),
-          ),
-        ],
+            Container(
+              width: size.width,
+              padding: EdgeInsets.symmetric(
+                vertical: 10.0,
+                horizontal: 40.0,
+              ),
+              child: Text(
+                "Comments",
+                textAlign: TextAlign.left,
+                style: TextStyle(
+                  color: Colors.black,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
+            Expanded(
+              child: Container(
+                child: ListView.builder(
+                  physics: BouncingScrollPhysics(),
+                  itemCount: post.comments.length,
+                  itemBuilder: (context, index){
+                    return Container(
+                      width: size.width,
+                      padding: EdgeInsets.symmetric(
+                        horizontal: 40.0,
+                        vertical: 10.0,
+                      ),
+                      child: Container(
+                        child: Row(
+                          children: [
+                            CircleAvatar(
+                              backgroundImage: CachedNetworkImageProvider(
+                                post.comments[index].userImage
+                              ),
+                            ),
+                            SizedBox(width: 10.0),
+                            Expanded(
+                              child: RichText(
+                                textAlign: TextAlign.left,
+                                textDirection: TextDirection.ltr,
+                                maxLines: 2,
+                                overflow: TextOverflow.ellipsis,
+                                text: TextSpan(
+                                  text: post.comments[index].username+" ",
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.bold
+                                  ),
+                                  children: [
+                                    TextSpan(
+                                      text: post.comments[index].commentBody,
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.normal,
+                                      )
+                                    ),
+                                  ]
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    );
+                  }
+                ),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
 }
+

@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:katchymemes/models/posts_model.dart';
 import 'package:katchymemes/widgets/post_card.dart';
 
+import '../details_screen.dart';
+
 class RecentTab extends StatefulWidget {
   @override
   _RecentTabState createState() => _RecentTabState();
@@ -23,6 +25,9 @@ class _RecentTabState extends State<RecentTab> {
           imageUrl: posts[index].postImage,
           likeCount: posts[index].likesCount,
           commentCount: posts[index].commentsCount,
+          onPress: (){
+            Navigator.push(context, MaterialPageRoute(builder: (context) => DetailScreen(posts[index])));
+          },
         );
       },
     );
