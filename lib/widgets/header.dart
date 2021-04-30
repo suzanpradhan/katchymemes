@@ -2,22 +2,26 @@ import 'package:flutter/material.dart';
 
 class Header extends StatelessWidget {
   const Header({
-    Key key,
-    @required this.size,
+    Key key, 
+    this.title,
   }) : super(key: key);
 
-  final Size size;
+  final String title;
 
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
     return Container(
       width: size.width,
-      padding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
+      padding: EdgeInsets.symmetric(
+        horizontal: 10.0,
+        vertical: 5.0
+      ),
       child: Text(
-        "KATCHYMEMES",
+        title,
         style: TextStyle(
           color: Colors.black,
-          fontWeight: FontWeight.bold,
+          fontWeight: FontWeight.w600,
           fontSize: 18.0,
         ),
       ),

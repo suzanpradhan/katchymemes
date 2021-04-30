@@ -4,7 +4,6 @@ import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:katchymemes/models/posts_model.dart';
 import 'package:katchymemes/screens/home.dart';
-import 'package:katchymemes/screens/tab_screens/recent_screen.dart';
 import 'package:katchymemes/widgets/custom_stack.dart';
 
 class DetailScreen extends StatelessWidget {
@@ -30,7 +29,6 @@ class DetailScreen extends StatelessWidget {
               },
             ),
             Container(
-              padding: EdgeInsets.all(20.0),
               child: ListTile(
                 leading: CircleAvatar(
                     backgroundImage: CachedNetworkImageProvider(
@@ -54,7 +52,7 @@ class DetailScreen extends StatelessWidget {
             ),
             Container(
               padding: EdgeInsets.symmetric(
-                horizontal: 40.0,
+                horizontal: 15.0,
                 vertical: 10.0
               ),
               width: size.width,
@@ -67,14 +65,14 @@ class DetailScreen extends StatelessWidget {
               width: size.width,
               padding: EdgeInsets.symmetric(
                 vertical: 10.0,
-                horizontal: 40.0,
+                horizontal: 15.0,
               ),
               child: Text(
                 "Comments",
                 textAlign: TextAlign.left,
                 style: TextStyle(
                   color: Colors.black,
-                  fontWeight: FontWeight.bold,
+                  fontWeight: FontWeight.w600,
                 ),
               ),
             ),
@@ -87,7 +85,7 @@ class DetailScreen extends StatelessWidget {
                     return Container(
                       width: size.width,
                       padding: EdgeInsets.symmetric(
-                        horizontal: 40.0,
+                        horizontal: 15.0,
                         vertical: 10.0,
                       ),
                       child: Container(
@@ -108,13 +106,15 @@ class DetailScreen extends StatelessWidget {
                                 text: TextSpan(
                                   text: post.comments[index].username+" ",
                                   style: TextStyle(
-                                    fontWeight: FontWeight.bold
+                                    fontWeight: FontWeight.w600,
+                                    color: Colors.black
                                   ),
                                   children: [
                                     TextSpan(
                                       text: post.comments[index].commentBody,
                                       style: TextStyle(
                                         fontWeight: FontWeight.normal,
+                                        color: Colors.black87
                                       )
                                     ),
                                   ]

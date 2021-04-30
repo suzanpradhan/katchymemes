@@ -28,12 +28,10 @@ class _HomeScreenState extends State<HomeScreen>  with TickerProviderStateMixin{
   
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
     return Column(
       children: [
-        Header(size: size),
+        Header(title: "KATCHYMEMES",),
         Container(
-          width: size.width,
           child: TabBar(
             controller: _tabController,
             tabs: [

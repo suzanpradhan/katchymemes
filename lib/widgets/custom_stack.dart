@@ -25,7 +25,6 @@ class CustomStack extends StatelessWidget {
       children: [
         Container(
           width: size.width,
-          height: size.height * 0.3,
           child: Image(
             fit: BoxFit.cover,
             image: NetworkImage(

@@ -21,13 +21,16 @@ class PostCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
+      padding: EdgeInsets.symmetric(vertical: 5.0, horizontal: 10.0),
         child: Card(
           elevation: 1,
             child: Column(
               children: [
                 Container(
-                  padding: EdgeInsets.all(10.0),
+                  padding: EdgeInsets.symmetric(
+                    horizontal: 10.0,
+                    vertical: 5.0,
+                  ),
                   child: PostHeader(userImage: userImage, username: username, time: time),
                 ),
                 GestureDetector(
@@ -41,7 +44,10 @@ class PostCard extends StatelessWidget {
                   ),
                 ),
                 Container(
-                  padding: EdgeInsets.all(10.0),
+                  padding: EdgeInsets.symmetric(
+                    horizontal: 10.0,
+                    vertical: 5.0,
+                  ),
                   child: Row(
                     children: [
                       IconButton(
@@ -145,7 +151,6 @@ class PostHeader extends StatelessWidget {
             ],
           ),
         ),
-        Spacer(),
         IconButton(
           icon: Icon(EvaIcons.moreVerticalOutline), 
           onPressed: (){

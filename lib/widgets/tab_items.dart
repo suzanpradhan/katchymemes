@@ -15,7 +15,7 @@ class TabItem extends StatelessWidget {
     Size size = MediaQuery.of(context).size;
     return Container(
       width: size.width,
-      padding: EdgeInsets.all(10.0),
+      padding: EdgeInsets.all(5.0),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(25.0),
       ),
