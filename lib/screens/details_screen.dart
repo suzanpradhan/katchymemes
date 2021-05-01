@@ -7,7 +7,6 @@ import 'package:katchymemes/screens/home.dart';
 import 'package:katchymemes/widgets/custom_stack.dart';
 
 class DetailScreen extends StatelessWidget {
-
   final Post post;
 
   DetailScreen(this.post);
@@ -24,16 +23,14 @@ class DetailScreen extends StatelessWidget {
               left: 20.0,
               top: 20.0,
               icon: EvaIcons.arrowIosBackOutline,
-              onTap: (){
-                Navigator.push(context, MaterialPageRoute(builder: (context) => Home()));
+              onTap: () {
+                Navigator.pop(context);
               },
             ),
             Container(
               child: ListTile(
                 leading: CircleAvatar(
-                    backgroundImage: CachedNetworkImageProvider(
-                    post.userImage
-                  ),
+                  backgroundImage: CachedNetworkImageProvider(post.userImage),
                 ),
                 title: Text(post.username),
                 subtitle: Text(post.postedDate),
@@ -44,17 +41,14 @@ class DetailScreen extends StatelessWidget {
                     primary: Colors.white,
                     onSurface: Colors.grey,
                   ),
-                  onPressed: (){
+                  onPressed: () {
                     print("follow");
                   },
                 ),
               ),
             ),
             Container(
-              padding: EdgeInsets.symmetric(
-                horizontal: 15.0,
-                vertical: 10.0
-              ),
+              padding: EdgeInsets.symmetric(horizontal: 15.0, vertical: 10.0),
               width: size.width,
               child: Text(
                 post.postText,
@@ -79,54 +73,49 @@ class DetailScreen extends StatelessWidget {
             Expanded(
               child: Container(
                 child: ListView.builder(
-                  physics: BouncingScrollPhysics(),
-                  itemCount: post.comments.length,
-                  itemBuilder: (context, index){
-                    return Container(
-                      width: size.width,
-                      padding: EdgeInsets.symmetric(
-                        horizontal: 15.0,
-                        vertical: 10.0,
-                      ),
-                      child: Container(
-                        child: Row(
-                          children: [
-                            CircleAvatar(
-                              backgroundImage: CachedNetworkImageProvider(
-                                post.comments[index].userImage
+                    physics: BouncingScrollPhysics(),
+                    itemCount: post.comments.length,
+                    itemBuilder: (context, index) {
+                      return Container(
+                        width: size.width,
+                        padding: EdgeInsets.symmetric(
+                          horizontal: 15.0,
+                          vertical: 10.0,
+                        ),
+                        child: Container(
+                          child: Row(
+                            children: [
+                              CircleAvatar(
+                                backgroundImage: CachedNetworkImageProvider(
+                                    post.comments[index].userImage),
                               ),
-                            ),
-                            SizedBox(width: 10.0),
-                            Expanded(
-                              child: RichText(
-                                textAlign: TextAlign.left,
-                                textDirection: TextDirection.ltr,
-                                maxLines: 2,
-                                overflow: TextOverflow.ellipsis,
-                                text: TextSpan(
-                                  text: post.comments[index].username+" ",
-                                  style: TextStyle(
-                                    fontWeight: FontWeight.w600,
-                                    color: Colors.black
-                                  ),
-                                  children: [
-                                    TextSpan(
-                                      text: post.comments[index].commentBody,
+                              SizedBox(width: 10.0),
+                              Expanded(
+                                child: RichText(
+                                  textAlign: TextAlign.left,
+                                  textDirection: TextDirection.ltr,
+                                  maxLines: 2,
+                                  overflow: TextOverflow.ellipsis,
+                                  text: TextSpan(
+                                      text: post.comments[index].username + " ",
                                       style: TextStyle(
-                                        fontWeight: FontWeight.normal,
-                                        color: Colors.black87
-                                      )
-                                    ),
-                                  ]
+                                          fontWeight: FontWeight.w600,
+                                          color: Colors.black),
+                                      children: [
+                                        TextSpan(
+                                            text: post
+                                                .comments[index].commentBody,
+                                            style: TextStyle(
+                                                fontWeight: FontWeight.normal,
+                                                color: Colors.black87)),
+                                      ]),
                                 ),
                               ),
-                            ),
-                          ],
+                            ],
+                          ),
                         ),
-                      ),
-                    );
-                  }
-                ),
+                      );
+                    }),
               ),
             ),
           ],
@@ -135,4 +124,3 @@ class DetailScreen extends StatelessWidget {
     );
   }
 }
-

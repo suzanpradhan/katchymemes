@@ -4,13 +4,13 @@ import 'package:flutter/material.dart';
 
 class PostCard extends StatelessWidget {
   const PostCard({
-    Key key, 
-    this.username, 
-    this.time, 
-    this.imageUrl, 
-    this.likeCount, 
-    this.commentCount, 
-    this.userImage, 
+    Key key,
+    this.username,
+    this.time,
+    this.imageUrl,
+    this.likeCount,
+    this.commentCount,
+    this.userImage,
     this.onPress,
   }) : super(key: key);
 
@@ -21,86 +21,123 @@ class PostCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.symmetric(vertical: 5.0, horizontal: 10.0),
-        child: Card(
-          elevation: 1,
-            child: Column(
-              children: [
-                Container(
-                  padding: EdgeInsets.symmetric(
-                    horizontal: 10.0,
-                    vertical: 5.0,
-                  ),
-                  child: PostHeader(userImage: userImage, username: username, time: time),
+      padding: EdgeInsets.fromLTRB(18, 14, 18, 0),
+      child: Container(
+        decoration: BoxDecoration(
+            color: Colors.white,
+            boxShadow: [
+              BoxShadow(
+                  color: Color(0xfff1f1f1),
+                  blurRadius: 5,
+                  offset: Offset(0, 5),
+                  spreadRadius: 1)
+            ],
+            borderRadius: BorderRadius.circular(8)),
+        child: Column(
+          children: [
+            Container(
+              padding: EdgeInsets.fromLTRB(10, 5, 0, 5),
+              child: PostHeader(
+                  userImage: userImage, username: username, time: time),
+            ),
+            GestureDetector(
+              onTap: onPress,
+              child: Container(
+                child: Image(
+                  image: NetworkImage(imageUrl),
                 ),
-                GestureDetector(
-                  onTap: onPress,
-                  child: Container(
-                    child: Image(
-                      image: NetworkImage(
-                        imageUrl
-                      ),
+              ),
+            ),
+            Container(
+              padding: EdgeInsets.symmetric(
+                horizontal: 10.0,
+                vertical: 5.0,
+              ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  Container(
+                    child: Row(
+                      children: [
+                        IconButton(
+                            icon: Icon(EvaIcons.heartOutline),
+                            onPressed: () {
+                              print("write like function");
+                            }),
+                        Text(
+                          "$likeCount",
+                          textAlign: TextAlign.start,
+                          style: TextStyle(
+                              color: Colors.grey,
+                              fontSize: 12.0,
+                              fontWeight: FontWeight.normal),
+                        ),
+                      ],
                     ),
                   ),
-                ),
-                Container(
-                  padding: EdgeInsets.symmetric(
-                    horizontal: 10.0,
-                    vertical: 5.0,
-                  ),
-                  child: Row(
-                    children: [
-                      IconButton(
-                        icon: Icon(EvaIcons.heartOutline), 
-                        onPressed: (){
-                          print("write like function");
-                        }
-                      ),
-                      Text(
-                        "$likeCount",
-                        textAlign: TextAlign.start,
-                        style: TextStyle(
-                          color: Colors.grey,
-                          fontSize: 12.0,
-                          fontWeight: FontWeight.normal
+                  Container(
+                    child: Row(
+                      children: [
+                        IconButton(
+                            icon: Icon(EvaIcons.messageSquareOutline),
+                            onPressed: () {
+                              print("write comment function");
+                            }),
+                        Text(
+                          "$commentCount",
+                          textAlign: TextAlign.start,
+                          style: TextStyle(
+                              color: Colors.grey,
+                              fontSize: 12.0,
+                              fontWeight: FontWeight.normal),
                         ),
-                      ),
-                      SizedBox(width: 8.0),
-                      IconButton(
-                        icon: Icon(EvaIcons.messageSquareOutline), 
-                        onPressed: (){
-                          print("write comment function");
-                        }
-                      ),
-                      Text(
-                        "$commentCount",
-                        textAlign: TextAlign.start,
-                        style: TextStyle(
-                          color: Colors.grey,
-                          fontSize: 12.0,
-                          fontWeight: FontWeight.normal
-                        ),
-                      ),
-                      SizedBox(width: 8.0),
-                      IconButton(
-                        icon: Icon(EvaIcons.cloudDownloadOutline), 
-                        onPressed: (){
-                          print("write download function");
-                        }
-                      ),
-                      Spacer(),
-                      IconButton(
-                        icon: Icon(EvaIcons.shareOutline), 
-                        onPressed: (){
-                          print("write share function");
-                        }
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
-                ),
-              ],
+                  Container(
+                    child: Row(
+                      children: [
+                        IconButton(
+                            icon: Icon(EvaIcons.cloudDownloadOutline),
+                            onPressed: () {
+                              print("write download function");
+                            }),
+                        Text(
+                          "$likeCount",
+                          textAlign: TextAlign.start,
+                          style: TextStyle(
+                              color: Colors.grey,
+                              fontSize: 12.0,
+                              fontWeight: FontWeight.normal),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Container(
+                    child: Row(
+                      children: [
+                        IconButton(
+                            icon: Icon(EvaIcons.shareOutline),
+                            onPressed: () {
+                              print("write share function");
+                            }),
+                        Text(
+                          "$likeCount",
+                          textAlign: TextAlign.start,
+                          style: TextStyle(
+                              color: Colors.grey,
+                              fontSize: 12.0,
+                              fontWeight: FontWeight.normal),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
             ),
+          ],
         ),
+      ),
     );
   }
 }
@@ -122,9 +159,7 @@ class PostHeader extends StatelessWidget {
     return Row(
       children: [
         CircleAvatar(
-          backgroundImage: CachedNetworkImageProvider(
-            userImage
-          ),
+          backgroundImage: CachedNetworkImageProvider(userImage),
         ),
         SizedBox(width: 8.0),
         Expanded(
@@ -143,19 +178,34 @@ class PostHeader extends StatelessWidget {
                 time,
                 textAlign: TextAlign.start,
                 style: TextStyle(
-                  color: Colors.grey,
-                  fontSize: 12.0,
-                  fontWeight: FontWeight.normal
-                ),
+                    color: Colors.grey,
+                    fontSize: 12.0,
+                    fontWeight: FontWeight.normal),
               ),
             ],
           ),
         ),
-        IconButton(
-          icon: Icon(EvaIcons.moreVerticalOutline), 
-          onPressed: (){
-            print("write option function");
-          },
+        Row(
+          children: [
+            ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  primary: Colors.pink,
+                ),
+                onPressed: () {},
+                child: Text(
+                  "Follow",
+                  style: TextStyle(color: Colors.white),
+                )),
+            IconButton(
+              icon: Icon(
+                EvaIcons.moreVerticalOutline,
+                size: 20,
+              ),
+              onPressed: () {
+                print("write option function");
+              },
+            )
+          ],
         )
       ],
     );

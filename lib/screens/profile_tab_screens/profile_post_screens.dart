@@ -1,21 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:katchymemes/models/posts_model.dart';
+import 'package:katchymemes/screens/details_screen.dart';
 import 'package:katchymemes/widgets/post_card.dart';
 
-import '../details_screen.dart';
-
-class RecentTab extends StatefulWidget {
+class ProfilePostScreens extends StatefulWidget {
   @override
-  _RecentTabState createState() => _RecentTabState();
+  _ProfilePostScreensState createState() => _ProfilePostScreensState();
 }
 
-class _RecentTabState extends State<RecentTab> {
+class _ProfilePostScreensState extends State<ProfilePostScreens> {
   final posts = Post.fetchAll();
-
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
-      physics: BouncingScrollPhysics(),
+      shrinkWrap: true,
+      physics: NeverScrollableScrollPhysics(),
       itemCount: posts.length,
       itemBuilder: (context, index) {
         return PostCard(

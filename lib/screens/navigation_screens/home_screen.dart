@@ -10,69 +10,95 @@ class HomeScreen extends StatefulWidget {
   _HomeScreenState createState() => _HomeScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen>  with TickerProviderStateMixin{
-
+class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   TabController _tabController;
 
-  void initState(){
+  void initState() {
     super.initState();
     _tabController = TabController(length: 3, vsync: this);
     _tabController.addListener(handleTabSelection);
   }
 
-  void handleTabSelection(){
-    setState(() {
-      
-    });
+  void handleTabSelection() {
+    setState(() {});
   }
-  
+
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Header(title: "KATCHYMEMES",),
         Container(
-          child: TabBar(
-            controller: _tabController,
-            tabs: [
-              Tab(
-                child: TabItem(
-                  title: "Recent",
-                  color: _tabController.index == 0 ? Colors.white : Colors.black,
+            decoration: BoxDecoration(color: Colors.white),
+            child: Column(
+              children: [
+                Container(
+                  height: 50,
+                  width: double.infinity,
+                  child: Center(
+                    child: Text(
+                      "KATCHY MEMES",
+                      style:
+                          TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                    ),
+                  ),
                 ),
-              ),
-              Tab(
-                child: TabItem(
-                  title: "Trending",
-                  color: _tabController.index == 1 ? Colors.white : Colors.black
+                Container(
+                  height: 50,
+                  padding: EdgeInsets.symmetric(vertical: 10),
+                  child: TabBar(
+                    controller: _tabController,
+                    tabs: [
+                      Text("Recent"),
+                      Text("Trending"),
+                      Text("Invite")
+                      // Tab(
+                      //   child: TabItem(
+                      //     title: "Recent",
+                      //     color: _tabController.index == 0
+                      //         ? Colors.white
+                      //         : Color(0xff707070),
+                      //   ),
+                      // ),
+                      // Tab(
+                      //   child: TabItem(
+                      //       title: "Trending",
+                      //       color: _tabController.index == 1
+                      //           ? Colors.white
+                      //           : Color(0xff707070)),
+                      // ),
+                      // Tab(
+                      //   child: TabItem(
+                      //       title: "Invite",
+                      //       color: _tabController.index == 2
+                      //           ? Colors.white
+                      //           : Color(0xff707070)),
+                      // ),
+                    ],
+                    labelPadding: EdgeInsets.symmetric(horizontal: 20),
+                    isScrollable: true,
+                    indicatorSize: TabBarIndicatorSize.tab,
+                    // indicatorPadding: EdgeInsets.symmetric(horizontal: 10.0),
+                    labelColor: Colors.white,
+                    unselectedLabelColor: Color(0xff0d0d0d),
+                    labelStyle: TextStyle(fontSize: 16),
+                    indicator: BoxDecoration(
+                      color: Colors.pink,
+                      borderRadius: BorderRadius.circular(25.0),
+                    ),
+                  ),
                 ),
-              ),
-              Tab(
-                child: TabItem(
-                  title: "Invite",
-                  color: _tabController.index == 2 ? Colors.white : Colors.black
-                ),
-              ),
-            ],
-            indicatorPadding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
-            indicator: BoxDecoration(
-              color: Colors.pink,
-              borderRadius: BorderRadius.circular(25.0),
-            ),
-          ),
-        ),
+              ],
+            )),
         Expanded(
-          child: TabBarView(
-            controller: _tabController,
-            children: [
-              RecentTab(),
-              TrendingTab(),
-              InviteTab(),
-            ],
-          )
-        )
+            child: TabBarView(
+          controller: _tabController,
+          children: [
+            RecentTab(),
+            TrendingTab(),
+            InviteTab(),
+          ],
+        ))
       ],
     );
   }
 }
-
