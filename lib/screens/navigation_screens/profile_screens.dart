@@ -1,12 +1,10 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';
-import 'package:katchymemes/screens/profile_tab_screens/profile_comments_screens.dart';
 import 'package:katchymemes/screens/profile_tab_screens/profile_followers_section.dart';
 import 'package:katchymemes/screens/profile_tab_screens/profile_following_screens.dart';
 import 'package:katchymemes/screens/profile_tab_screens/profile_post_screens.dart';
 import 'package:katchymemes/screens/settings_screen.dart';
-import 'package:katchymemes/widgets/custom_stack.dart';
 
 class ProfileScreen extends StatefulWidget {
   @override
@@ -28,7 +26,6 @@ class _ProfileScreenState extends State<ProfileScreen>
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
 
     _currentTabIndex = 0;

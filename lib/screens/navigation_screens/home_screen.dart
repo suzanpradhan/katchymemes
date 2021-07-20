@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:katchymemes/screens/tab_screens/invite_screen.dart';
 import 'package:katchymemes/screens/tab_screens/recent_screen.dart';
 import 'package:katchymemes/screens/tab_screens/trending_screen.dart';
-import 'package:katchymemes/widgets/header.dart';
-import 'package:katchymemes/widgets/tab_items.dart';
 
 class HomeScreen extends StatefulWidget {
   @override

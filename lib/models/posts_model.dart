@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:katchymemes/models/comments_model.dart';
 
 class Post{
