@@ -11,12 +11,12 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
-  TabController _tabController;
+  TabController? _tabController;
 
   void initState() {
     super.initState();
     _tabController = TabController(length: 3, vsync: this);
-    _tabController.addListener(handleTabSelection);
+    _tabController!.addListener(handleTabSelection);
   }
 
   void handleTabSelection() {

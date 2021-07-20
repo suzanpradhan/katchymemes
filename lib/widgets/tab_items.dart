@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 
 class TabItem extends StatelessWidget {
   const TabItem({
-    Key key,
+    Key? key,
     this.color,
-    @required this.title,
+    required this.title,
   }) : super(key: key);
 
   final String title;
-  final Color color;
+  final Color? color;
 
   @override
   Widget build(BuildContext context) {

@@ -5,9 +5,9 @@ class Comments{
   final String username, userImage, commentBody;
 
   Comments({
-    @required this.username,
-    @required this.userImage,
-    @required this.commentBody
+    required this.username,
+    required this.userImage,
+    required this.commentBody
   });
   
 }

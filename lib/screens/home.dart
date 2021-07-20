@@ -16,7 +16,7 @@ class _HomeState extends State<Home> {
 
   int _currentIndex = 0;
 
-  List<Widget> _navigationScreens;
+  late List<Widget> _navigationScreens;
 
   @override
   void initState(){

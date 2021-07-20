@@ -22,7 +22,7 @@ class DetailScreen extends StatelessWidget {
               imageUrl: post.postImage,
               left: 20.0,
               top: 20.0,
-              icon: EvaIcons.arrowIosBackOutline,
+              icon: EvaIcons.arrowIosBackOutline as EvaIconData?,
               onTap: () {
                 Navigator.pop(context);
               },
@@ -30,10 +30,10 @@ class DetailScreen extends StatelessWidget {
             Container(
               child: ListTile(
                 leading: CircleAvatar(
-                  backgroundImage: CachedNetworkImageProvider(post.userImage),
+                  backgroundImage: CachedNetworkImageProvider(post.userImage!),
                 ),
-                title: Text(post.username),
-                subtitle: Text(post.postedDate),
+                title: Text(post.username!),
+                subtitle: Text(post.postedDate!),
                 trailing: TextButton(
                   child: Text("Follow"),
                   style: TextButton.styleFrom(
@@ -51,7 +51,7 @@ class DetailScreen extends StatelessWidget {
               padding: EdgeInsets.symmetric(horizontal: 15.0, vertical: 10.0),
               width: size.width,
               child: Text(
-                post.postText,
+                post.postText!,
                 textAlign: TextAlign.left,
               ),
             ),
@@ -74,7 +74,7 @@ class DetailScreen extends StatelessWidget {
               child: Container(
                 child: ListView.builder(
                     physics: BouncingScrollPhysics(),
-                    itemCount: post.comments.length,
+                    itemCount: post.comments!.length,
                     itemBuilder: (context, index) {
                       return Container(
                         width: size.width,
@@ -87,7 +87,7 @@ class DetailScreen extends StatelessWidget {
                             children: [
                               CircleAvatar(
                                 backgroundImage: CachedNetworkImageProvider(
-                                    post.comments[index].userImage),
+                                    post.comments![index].userImage),
                               ),
                               SizedBox(width: 10.0),
                               Expanded(
@@ -97,14 +97,14 @@ class DetailScreen extends StatelessWidget {
                                   maxLines: 2,
                                   overflow: TextOverflow.ellipsis,
                                   text: TextSpan(
-                                      text: post.comments[index].username + " ",
+                                      text: post.comments![index].username + " ",
                                       style: TextStyle(
                                           fontWeight: FontWeight.w600,
                                           color: Colors.black),
                                       children: [
                                         TextSpan(
                                             text: post
-                                                .comments[index].commentBody,
+                                                .comments![index].commentBody,
                                             style: TextStyle(
                                                 fontWeight: FontWeight.normal,
                                                 color: Colors.black87)),

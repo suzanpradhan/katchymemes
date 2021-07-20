@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 
 class PostCard extends StatelessWidget {
   const PostCard({
-    Key key,
+    Key? key,
     this.username,
     this.time,
     this.imageUrl,
@@ -14,9 +14,9 @@ class PostCard extends StatelessWidget {
     this.onPress,
   }) : super(key: key);
 
-  final String username, time, imageUrl, userImage;
-  final int likeCount, commentCount;
-  final Function onPress;
+  final String? username, time, imageUrl, userImage;
+  final int? likeCount, commentCount;
+  final Function? onPress;
 
   @override
   Widget build(BuildContext context) {
@@ -41,10 +41,10 @@ class PostCard extends StatelessWidget {
                   userImage: userImage, username: username, time: time),
             ),
             GestureDetector(
-              onTap: onPress,
+              onTap: onPress as void Function()?,
               child: Container(
                 child: Image(
-                  image: NetworkImage(imageUrl),
+                  image: NetworkImage(imageUrl!),
                 ),
               ),
             ),
@@ -144,22 +144,22 @@ class PostCard extends StatelessWidget {
 
 class PostHeader extends StatelessWidget {
   const PostHeader({
-    Key key,
-    @required this.userImage,
-    @required this.username,
-    @required this.time,
+    Key? key,
+    required this.userImage,
+    required this.username,
+    required this.time,
   }) : super(key: key);
 
-  final String userImage;
-  final String username;
-  final String time;
+  final String? userImage;
+  final String? username;
+  final String? time;
 
   @override
   Widget build(BuildContext context) {
     return Row(
       children: [
         CircleAvatar(
-          backgroundImage: CachedNetworkImageProvider(userImage),
+          backgroundImage: CachedNetworkImageProvider(userImage!),
         ),
         SizedBox(width: 8.0),
         Expanded(
@@ -167,7 +167,7 @@ class PostHeader extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                username,
+                username!,
                 textAlign: TextAlign.start,
                 style: TextStyle(
                   color: Colors.black,
@@ -175,7 +175,7 @@ class PostHeader extends StatelessWidget {
                 ),
               ),
               Text(
-                time,
+                time!,
                 textAlign: TextAlign.start,
                 style: TextStyle(
                     color: Colors.grey,

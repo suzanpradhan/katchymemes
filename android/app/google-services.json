@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "622817645095",
+    "project_id": "katchymemes",
+    "storage_bucket": "katchymemes.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:622817645095:android:796cfc4ff4d8348341b402",
+        "android_client_info": {
+          "package_name": "com.example.katchymemes"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "622817645095-r2c4sohbl4l0kc9kj3mmda3oglmfd43t.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.katchymemes",
+            "certificate_hash": "e930a587a5b3b893cefe97d28607c5173c3ff758"
+          }
+        },
+        {
+          "client_id": "622817645095-qcctfnomomof1stiae9vdh3sjmbuf7t2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCfLkUbGJcOr-DI5ca99g9plB-Vl0q-jh8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "622817645095-qcctfnomomof1stiae9vdh3sjmbuf7t2.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

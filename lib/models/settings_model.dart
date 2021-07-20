@@ -7,8 +7,8 @@ class Settings{
   final IconData settingIcon;
   
   Settings({
-    @required this.settingTitle,
-    @required this.settingIcon,
+    required this.settingTitle,
+    required this.settingIcon,
   });
 
 }

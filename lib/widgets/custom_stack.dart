@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 
 class CustomStack extends StatelessWidget {
   const CustomStack({
-    Key key, 
+    Key? key, 
     this.top, 
     this.left, 
     this.right, 
@@ -13,10 +13,10 @@ class CustomStack extends StatelessWidget {
     this.icon,
   }) : super(key: key);
 
-  final double top, left, right, bottom;
-  final Function onTap;
-  final String imageUrl;
-  final EvaIconData icon;
+  final double? top, left, right, bottom;
+  final Function? onTap;
+  final String? imageUrl;
+  final EvaIconData? icon;
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +28,7 @@ class CustomStack extends StatelessWidget {
           child: Image(
             fit: BoxFit.cover,
             image: NetworkImage(
-              imageUrl
+              imageUrl!
             )
           ),
         ),
@@ -44,7 +44,7 @@ class CustomStack extends StatelessWidget {
             ),
             child: IconButton(
               icon: Icon(icon),
-              onPressed: onTap,
+              onPressed: onTap as void Function()?,
             ),
           )
         )

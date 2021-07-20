@@ -15,9 +15,9 @@ class ProfileScreen extends StatefulWidget {
 
 class _ProfileScreenState extends State<ProfileScreen>
     with TickerProviderStateMixin {
-  TabController _tabControllerForProfile;
+  TabController? _tabControllerForProfile;
 
-  int _currentTabIndex;
+  late int _currentTabIndex;
 
   List<Widget> _profileTabViews = <Widget>[
     ProfilePostScreens(),
@@ -33,9 +33,9 @@ class _ProfileScreenState extends State<ProfileScreen>
 
     _currentTabIndex = 0;
     _tabControllerForProfile = TabController(length: 3, vsync: this);
-    _tabControllerForProfile.addListener(() {
+    _tabControllerForProfile!.addListener(() {
       setState(() {
-        _currentTabIndex = _tabControllerForProfile.index;
+        _currentTabIndex = _tabControllerForProfile!.index;
       });
     });
   }

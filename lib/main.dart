@@ -1,8 +1,14 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:katchymemes/screens/auth_screens/login_screen.dart';
 import 'package:katchymemes/screens/home.dart';
+import 'package:katchymemes/screens/splash_screen.dart';
 
-void main() => runApp(MyApp());
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  // await Firebase.initializeApp();
+  runApp(MyApp());
+}
 
 class MyApp extends StatelessWidget {
   @override
@@ -10,7 +16,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Katchymemes',
       debugShowCheckedModeBanner: false,
-      home: LoginScreen(),
+      home: SplashScreen(),
     );
   }
 }

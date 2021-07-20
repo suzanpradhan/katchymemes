@@ -40,7 +40,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
                             CircleAvatar(
                               radius: 24,
                               backgroundImage: CachedNetworkImageProvider(
-                                  listOfNotification[index].coverImageUrl),
+                                  listOfNotification[index].coverImageUrl!),
                             ),
                             SizedBox(
                               width: 14,
@@ -54,7 +54,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
                                       text: TextSpan(children: <TextSpan>[
                                     TextSpan(
                                         text:
-                                            listOfNotification[index].username +
+                                            listOfNotification[index].username! +
                                                 " ",
                                         style: TextStyle(
                                             color: Colors.black,
@@ -70,7 +70,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
                                     height: 5,
                                   ),
                                   Text(
-                                    listOfNotification[index].timeDateText,
+                                    listOfNotification[index].timeDateText!,
                                     style: TextStyle(
                                         fontSize: 14, color: Color(0xff707070)),
                                   ),

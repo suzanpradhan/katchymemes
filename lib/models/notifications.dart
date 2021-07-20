@@ -1,8 +1,8 @@
 class Notification {
-  String coverImageUrl;
-  String username;
-  String notification;
-  String timeDateText;
+  String? coverImageUrl;
+  String? username;
+  String? notification;
+  String? timeDateText;
 
   Notification(
       {this.username,

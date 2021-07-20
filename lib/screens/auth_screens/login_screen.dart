@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:katchymemes/blocs/auth/auth_bloc.dart';
 import 'package:katchymemes/screens/auth_screens/register_sceen.dart';
 import 'package:katchymemes/screens/home.dart';
 
@@ -127,7 +129,10 @@ class _LoginScreenState extends State<LoginScreen> {
                           onTap: () {
                             Navigator.of(context).push(MaterialPageRoute(
                                 builder: (BuildContext context) {
-                              return RegisterScreen();
+                              return BlocProvider(
+                                create: (context) => AuthBloc(),
+                                child: RegisterScreen(),
+                              );
                             }));
                           },
                           child: RichText(

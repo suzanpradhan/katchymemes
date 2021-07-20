@@ -3,17 +3,17 @@ import 'package:katchymemes/models/comments_model.dart';
 
 class Post{
 
-  String username, postedDate, postImage, userImage, postText;
+  String? username, postedDate, postImage, userImage, postText;
   int likesCount, commentsCount;
-  List<Comments> comments;
+  List<Comments>? comments;
 
   Post({
-    @required this.username,
-    @required this.userImage,
-    @required this.postedDate,
-    @required this.likesCount,
-    @required this.commentsCount,
-    @required this.postImage,
+    required this.username,
+    required this.userImage,
+    required this.postedDate,
+    required this.likesCount,
+    required this.commentsCount,
+    required this.postImage,
     this.postText,
     this.comments
   });

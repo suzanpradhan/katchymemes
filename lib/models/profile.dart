@@ -1,6 +1,6 @@
 class Profile {
-  String username;
-  String coverImageUrl;
+  String? username;
+  String? coverImageUrl;
 
   Profile({this.username, this.coverImageUrl});
 }

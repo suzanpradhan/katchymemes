@@ -25,13 +25,13 @@ class _ProfileFollowersScreenState extends State<ProfileFollowersScreen> {
                   CircleAvatar(
                     radius: 24,
                     backgroundImage: CachedNetworkImageProvider(
-                        listOfProfile[index].coverImageUrl),
+                        listOfProfile[index].coverImageUrl!),
                   ),
                   SizedBox(
                     width: 14,
                   ),
                   Text(
-                    listOfProfile[index].username,
+                    listOfProfile[index].username!,
                     style: TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.bold,
