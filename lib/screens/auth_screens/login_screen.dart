@@ -1,8 +1,9 @@
 import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hive/hive.dart';
 import 'package:katchymemes/blocs/auth/auth_bloc.dart';
+import 'package:katchymemes/models/login_model.dart';
 import 'package:katchymemes/screens/auth_screens/register_sceen.dart';
 import 'package:katchymemes/screens/home.dart';
 import 'package:http/http.dart' as http;
@@ -19,6 +20,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
   loginUser(String username, String password) async {
     var url = Uri.parse(ApiConstants.baseUrl + ApiConstants.loginUrl);
+    var apiKey = ApiConstants.apiKey;
     var response = await http.post(url,
         headers: {
           "Accept": "application/json",
@@ -27,18 +29,24 @@ class _LoginScreenState extends State<LoginScreen> {
         body: {
           "user": username,
           "password": password,
-          'key': '1e68ced40f2b3b52e77af3106f4985c6',
+          'key': apiKey,
         },
         encoding: Encoding.getByName("utf-8"));
 
     if (response.statusCode == 200) {
+      addUser(Login(apiKey, username));
       Navigator.of(this.context).pushAndRemoveUntil(
           MaterialPageRoute(builder: (BuildContext context) => Home()),
           (Route<dynamic> route) => false);
-      print(response.statusCode);
     } else {
       print(response.body);
     }
+  }
+
+  void addUser(Login login) {
+    Hive.box('login').add(login);
+    print(login.apikey);
+    print(login.username);
   }
 
   @override

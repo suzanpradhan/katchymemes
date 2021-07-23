@@ -48,7 +48,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
           "Content-Type": "application/x-www-form-urlencoded"
         },
         body: {
-          "key": "1e68ced40f2b3b52e77af3106f4985c6",
+          "key": ApiConstants.apiKey,
           "username": username,
           "password": password,
           "email": email,
