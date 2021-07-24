@@ -1,6 +1,7 @@
 import 'dart:ui';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
+import 'package:eva_icons_flutter/icon_data.dart';
 import 'package:flutter/material.dart';
 import 'package:katchymemes/models/posts_model.dart';
 import 'package:katchymemes/screens/home.dart';
@@ -22,7 +23,7 @@ class DetailScreen extends StatelessWidget {
               imageUrl: post.postImage,
               left: 20.0,
               top: 20.0,
-              icon: EvaIcons.arrowIosBackOutline as EvaIconData?,
+              icon: EvaIcons.arrowIosBackOutline as EvaIconData,
               onTap: () {
                 Navigator.pop(context);
               },
@@ -97,7 +98,8 @@ class DetailScreen extends StatelessWidget {
                                   maxLines: 2,
                                   overflow: TextOverflow.ellipsis,
                                   text: TextSpan(
-                                      text: post.comments![index].username + " ",
+                                      text:
+                                          post.comments![index].username + " ",
                                       style: TextStyle(
                                           fontWeight: FontWeight.w600,
                                           color: Colors.black),

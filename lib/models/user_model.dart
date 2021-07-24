@@ -5,5 +5,11 @@ class UserModel {
   String? bio;
   String? name;
 
-  UserModel({this.bio, this.email, this.id, this.name, this.username, })
+  UserModel({
+    this.bio,
+    this.email,
+    this.id,
+    this.name,
+    this.username,
+  });
 }
