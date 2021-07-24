@@ -13,13 +13,12 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-
   int _currentIndex = 0;
 
   late List<Widget> _navigationScreens;
 
   @override
-  void initState(){
+  void initState() {
     super.initState();
     _navigationScreens = <Widget>[
       HomeScreen(),
@@ -34,38 +33,26 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(
-        child: _navigationScreens[_currentIndex],
-        bottom: false,
-      ),
-      bottomNavigationBar: CustomNavigationBar(
-        currentIndex: _currentIndex,
-        selectedColor: Colors.pink,
-        unSelectedColor: Colors.grey,
-        onTap: (int index){
-          setState(() {
-            _currentIndex = index;
-          });
-        },
-        items: [
-            CustomNavigationBarItem(
-              icon: Icon(EvaIcons.homeOutline)
-            ),
-            CustomNavigationBarItem(
-              icon: Icon(EvaIcons.searchOutline)
-            ),
-            CustomNavigationBarItem(
-              icon: Icon(EvaIcons.plusCircleOutline)
-            ),
-            CustomNavigationBarItem(
-              icon: Icon(EvaIcons.bellOutline)
-            ),
-            CustomNavigationBarItem(
-              icon: Icon(EvaIcons.personOutline)
-            ),
-        ],
-      )
-    );
+        body: SafeArea(
+          child: _navigationScreens[_currentIndex],
+          bottom: false,
+        ),
+        bottomNavigationBar: CustomNavigationBar(
+          currentIndex: _currentIndex,
+          selectedColor: Colors.pink,
+          unSelectedColor: Colors.grey,
+          onTap: (int index) {
+            setState(() {
+              _currentIndex = index;
+            });
+          },
+          items: [
+            CustomNavigationBarItem(icon: Icon(EvaIcons.homeOutline)),
+            CustomNavigationBarItem(icon: Icon(EvaIcons.searchOutline)),
+            CustomNavigationBarItem(icon: Icon(EvaIcons.plusCircleOutline)),
+            CustomNavigationBarItem(icon: Icon(EvaIcons.bellOutline)),
+            CustomNavigationBarItem(icon: Icon(EvaIcons.personOutline)),
+          ],
+        ));
   }
 }
-

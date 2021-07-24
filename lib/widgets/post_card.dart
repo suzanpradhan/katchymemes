@@ -14,8 +14,7 @@ class PostCard extends StatelessWidget {
     this.onPress,
   }) : super(key: key);
 
-  final String? username, time, imageUrl, userImage;
-  final int? likeCount, commentCount;
+  final String? username, time, imageUrl, userImage, likeCount, commentCount;
   final Function? onPress;
 
   @override

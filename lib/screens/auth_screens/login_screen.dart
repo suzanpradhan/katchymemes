@@ -1,8 +1,13 @@
+import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hive/hive.dart';
 import 'package:katchymemes/blocs/auth/auth_bloc.dart';
+import 'package:katchymemes/models/login_model.dart';
 import 'package:katchymemes/screens/auth_screens/register_sceen.dart';
 import 'package:katchymemes/screens/home.dart';
+import 'package:http/http.dart' as http;
+import 'package:katchymemes/utils/contants/api_constants.dart';
 
 class LoginScreen extends StatefulWidget {
   @override
@@ -10,6 +15,40 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+  final usernameController = new TextEditingController();
+  final passwordController = new TextEditingController();
+
+  loginUser(String username, String password) async {
+    var url = Uri.parse(ApiConstants.baseUrl + ApiConstants.loginUrl);
+    var apiKey = ApiConstants.apiKey;
+    var response = await http.post(url,
+        headers: {
+          "Accept": "application/json",
+          "Content-Type": "application/x-www-form-urlencoded"
+        },
+        body: {
+          "user": username,
+          "password": password,
+          'key': apiKey,
+        },
+        encoding: Encoding.getByName("utf-8"));
+
+    if (response.statusCode == 200) {
+      addUser(Login(apiKey, username));
+      Navigator.of(this.context).pushAndRemoveUntil(
+          MaterialPageRoute(builder: (BuildContext context) => Home()),
+          (Route<dynamic> route) => false);
+    } else {
+      print(response.body);
+    }
+  }
+
+  void addUser(Login login) {
+    Hive.box('login').add(login);
+    print(login.apikey);
+    print(login.username);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -51,6 +90,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       color: Color(0xfff1f1f1),
                       borderRadius: BorderRadius.circular(10)),
                   child: TextField(
+                    controller: usernameController,
                     decoration: InputDecoration(
                         border: InputBorder.none, hintText: "Username"),
                     style: TextStyle(fontSize: 16),
@@ -69,6 +109,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     children: [
                       Expanded(
                         child: TextField(
+                          controller: passwordController,
                           decoration: InputDecoration(
                             border: InputBorder.none,
                             hintText: "Password",
@@ -107,10 +148,8 @@ class _LoginScreenState extends State<LoginScreen> {
                         borderRadius: BorderRadius.circular(8)),
                     elevation: 0,
                     onPressed: () {
-                      Navigator.of(context).pushReplacement(
-                          MaterialPageRoute(builder: (BuildContext context) {
-                        return Home();
-                      }));
+                      loginUser(
+                          usernameController.text, passwordController.text);
                     },
                     child: Text(
                       "Login",

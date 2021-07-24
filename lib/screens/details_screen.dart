@@ -4,7 +4,6 @@ import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:eva_icons_flutter/icon_data.dart';
 import 'package:flutter/material.dart';
 import 'package:katchymemes/models/posts_model.dart';
-import 'package:katchymemes/screens/home.dart';
 import 'package:katchymemes/widgets/custom_stack.dart';
 
 class DetailScreen extends StatelessWidget {
