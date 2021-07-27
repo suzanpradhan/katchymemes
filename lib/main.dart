@@ -4,6 +4,8 @@ import 'package:hive/hive.dart';
 import 'package:katchymemes/models/login_model.dart';
 import 'package:katchymemes/screens/auth_screens/login_screen.dart';
 import 'package:katchymemes/screens/home.dart';
+import 'package:katchymemes/screens/navigation_screens/home_screen.dart';
+import 'package:katchymemes/screens/splash_screen.dart';
 import 'package:path_provider/path_provider.dart' as path_provider;
 
 Future<void> main() async {
@@ -35,15 +37,25 @@ class _MyAppState extends State<MyApp> {
       debugShowCheckedModeBanner: false,
       home: FutureBuilder(
         future: Hive.openBox('login'),
-        builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.done) {
-            if (snapshot.hasError)
-              return Text(snapshot.error.toString());
-            else
+        builder: (context, AsyncSnapshot<Box> snapshot) {
+          if (snapshot.hasData) {
+            if (snapshot.data!.isEmpty) {
+              return LoginScreen();
+            } else {
               return Home();
+            }
           } else {
-            return LoginScreen();
+            return SplashScreen();
           }
+
+          // if (snapshot.connectionState == ConnectionState.done) {
+          //   if (snapshot.hasError)
+          //     return Text(snapshot.error.toString());
+          //   else
+          //     return Home();
+          // } else {
+          //   return LoginScreen();
+          // }
         },
       ),
     );

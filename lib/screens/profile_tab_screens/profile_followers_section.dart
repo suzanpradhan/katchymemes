@@ -1,4 +1,3 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:katchymemes/models/profile.dart';
 
@@ -24,8 +23,8 @@ class _ProfileFollowersScreenState extends State<ProfileFollowersScreen> {
                 children: [
                   CircleAvatar(
                     radius: 24,
-                    backgroundImage: CachedNetworkImageProvider(
-                        listOfProfile[index].coverImageUrl!),
+                    backgroundImage:
+                        NetworkImage(listOfProfile[index].coverImageUrl!),
                   ),
                   SizedBox(
                     width: 14,

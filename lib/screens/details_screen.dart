@@ -1,5 +1,3 @@
-import 'dart:ui';
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:eva_icons_flutter/icon_data.dart';
 import 'package:flutter/material.dart';
@@ -30,7 +28,7 @@ class DetailScreen extends StatelessWidget {
             Container(
               child: ListTile(
                 leading: CircleAvatar(
-                  backgroundImage: CachedNetworkImageProvider(post.userImage!),
+                  backgroundImage: NetworkImage(post.userImage!),
                 ),
                 title: Text(post.username!),
                 subtitle: Text(post.postedDate!),
@@ -86,7 +84,7 @@ class DetailScreen extends StatelessWidget {
                           child: Row(
                             children: [
                               CircleAvatar(
-                                backgroundImage: CachedNetworkImageProvider(
+                                backgroundImage: NetworkImage(
                                     post.comments![index].userImage),
                               ),
                               SizedBox(width: 10.0),

@@ -1,4 +1,3 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:katchymemes/screens/profile_tab_screens/profile_followers_section.dart';
@@ -49,7 +48,7 @@ class _ProfileScreenState extends State<ProfileScreen>
                   image: DecorationImage(
                       fit: BoxFit.cover,
                       alignment: Alignment.center,
-                      image: CachedNetworkImageProvider(
+                      image: NetworkImage(
                           "https://images.pexels.com/photos/844297/pexels-photo-844297.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"))),
             ),
           ],
@@ -150,7 +149,7 @@ class _ProfileScreenState extends State<ProfileScreen>
                   right: 0,
                   top: 212,
                   child: CircleAvatar(
-                    backgroundImage: CachedNetworkImageProvider(
+                    backgroundImage: NetworkImage(
                         "https://images.unsplash.com/photo-1511367461989-f85a21fda167?ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8cHJvZmlsZXxlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&w=1000&q=80"),
                     radius: 48,
                   )),

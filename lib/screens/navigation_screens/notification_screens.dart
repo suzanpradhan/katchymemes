@@ -1,4 +1,3 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:katchymemes/models/notifications.dart';
 
@@ -39,7 +38,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
                           children: [
                             CircleAvatar(
                               radius: 24,
-                              backgroundImage: CachedNetworkImageProvider(
+                              backgroundImage: NetworkImage(
                                   listOfNotification[index].coverImageUrl!),
                             ),
                             SizedBox(
@@ -53,9 +52,9 @@ class _NotificationScreenState extends State<NotificationScreen> {
                                   RichText(
                                       text: TextSpan(children: <TextSpan>[
                                     TextSpan(
-                                        text:
-                                            listOfNotification[index].username! +
-                                                " ",
+                                        text: listOfNotification[index]
+                                                .username! +
+                                            " ",
                                         style: TextStyle(
                                             color: Colors.black,
                                             fontWeight: FontWeight.bold,

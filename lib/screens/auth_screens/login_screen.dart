@@ -16,31 +16,55 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen> {
   final usernameController = new TextEditingController();
+  bool isLoading = false;
   final passwordController = new TextEditingController();
 
   loginUser(String username, String password) async {
-    var url = Uri.parse(ApiConstants.baseUrl + ApiConstants.loginUrl);
+    setState(() {
+      isLoading = true;
+    });
+    // try {
+    var url = Uri.parse(ApiConstants.baseUrl +
+        ApiConstants.loginUrl +
+        "user=$username&password=$password&key=${ApiConstants.apiKey}");
     var apiKey = ApiConstants.apiKey;
-    var response = await http.post(url,
-        headers: {
-          "Accept": "application/json",
-          "Content-Type": "application/x-www-form-urlencoded"
-        },
-        body: {
-          "user": username,
-          "password": password,
-          'key': apiKey,
-        },
-        encoding: Encoding.getByName("utf-8"));
+    print(url.toString());
+    // setState(() {
+    //   isLoading = false;
+    // });
+    // return null;
+    var response = await http.get(url);
+    Map result = jsonDecode(response.body);
+    print(result);
 
-    if (response.statusCode == 200) {
+    if (result["success"]["message"] == "success") {
       addUser(Login(apiKey, username));
       Navigator.of(this.context).pushAndRemoveUntil(
           MaterialPageRoute(builder: (BuildContext context) => Home()),
           (Route<dynamic> route) => false);
     } else {
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        content: Text(
+          "Login Failed",
+          style: TextStyle(color: Colors.red),
+        ),
+        backgroundColor: Colors.black,
+      ));
       print(response.body);
     }
+    // } catch (e) {
+    //   ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+    //     content: Text(
+    //       "Login Failed",
+    //       style: TextStyle(color: Colors.red),
+    //     ),
+    //     backgroundColor: Colors.black,
+    //   ));
+    // }
+
+    setState(() {
+      isLoading = false;
+    });
   }
 
   void addUser(Login login) {
@@ -148,13 +172,20 @@ class _LoginScreenState extends State<LoginScreen> {
                         borderRadius: BorderRadius.circular(8)),
                     elevation: 0,
                     onPressed: () {
-                      loginUser(
-                          usernameController.text, passwordController.text);
+                      if (!isLoading) {
+                        loginUser(
+                            usernameController.text, passwordController.text);
+                      }
                     },
-                    child: Text(
-                      "Login",
-                      style: TextStyle(fontSize: 18, color: Colors.white),
-                    )),
+                    child: (!isLoading)
+                        ? Text(
+                            "Login",
+                            style: TextStyle(fontSize: 18, color: Colors.white),
+                          )
+                        : CircularProgressIndicator(
+                            color: Colors.white,
+                            strokeWidth: 1,
+                          )),
                 SizedBox(
                   height: 18,
                 ),

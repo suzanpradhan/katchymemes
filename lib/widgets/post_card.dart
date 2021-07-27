@@ -1,4 +1,3 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';
 
@@ -43,7 +42,10 @@ class PostCard extends StatelessWidget {
               onTap: onPress as void Function()?,
               child: Container(
                 child: Image(
-                  image: NetworkImage(imageUrl!),
+                  image: (imageUrl != "" && imageUrl != null)
+                      ? NetworkImage(imageUrl!.toString())
+                      : AssetImage("assets/images/no_profile.png")
+                          as ImageProvider,
                 ),
               ),
             ),
@@ -144,9 +146,9 @@ class PostCard extends StatelessWidget {
 class PostHeader extends StatelessWidget {
   const PostHeader({
     Key? key,
-    required this.userImage,
-    required this.username,
-    required this.time,
+    this.userImage,
+    this.username,
+    this.time,
   }) : super(key: key);
 
   final String? userImage;
@@ -158,7 +160,9 @@ class PostHeader extends StatelessWidget {
     return Row(
       children: [
         CircleAvatar(
-          backgroundImage: CachedNetworkImageProvider(userImage!),
+          backgroundImage: (userImage != null && userImage != "")
+              ? NetworkImage(userImage.toString())
+              : AssetImage("assets/images/no_profile.png") as ImageProvider,
         ),
         SizedBox(width: 8.0),
         Expanded(
@@ -166,7 +170,7 @@ class PostHeader extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                username!,
+                username.toString(),
                 textAlign: TextAlign.start,
                 style: TextStyle(
                   color: Colors.black,
@@ -174,7 +178,7 @@ class PostHeader extends StatelessWidget {
                 ),
               ),
               Text(
-                time!,
+                time.toString(),
                 textAlign: TextAlign.start,
                 style: TextStyle(
                     color: Colors.grey,

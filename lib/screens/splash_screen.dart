@@ -12,10 +12,6 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
-    Navigator.of(context)
-        .push(MaterialPageRoute(builder: (BuildContext context) {
-      return LoginScreen();
-    }));
   }
 
   @override
