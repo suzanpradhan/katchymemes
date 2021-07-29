@@ -1,7 +1,8 @@
 import 'dart:convert';
+import 'dart:io';
+import 'package:dio/dio.dart';
 import 'package:http/http.dart' as http;
-
-import 'package:flutter/material.dart';
+import 'package:http_parser/http_parser.dart';
 import 'package:katchymemes/models/posts_model.dart';
 import 'package:katchymemes/utils/contants/api_constants.dart';
 
@@ -27,6 +28,27 @@ class PostRepository {
       return listOfPost;
     } catch (e) {
       return Future.error("Memes Load Failed.");
+    }
+  }
+
+  Future addPost(File _image) async {
+    try {
+      var dio = Dio();
+      var apiUrl = ApiConstants.baseUrl + ApiConstants.postsPostUrl;
+      var formData = FormData.fromMap({
+        // 'format': 'json',
+        'key': ApiConstants.apiKey,
+        'source': await MultipartFile.fromFile(_image.path,
+            filename: _image.path.split('/').last),
+      });
+      var response = await dio.post(apiUrl, data: formData);
+      if (response.statusCode == 200) {
+        print("Posted successfully");
+      } else {
+        print(response.statusCode);
+      }
+    } catch (e) {
+      print(e.toString());
     }
   }
 }

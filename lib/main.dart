@@ -4,7 +4,6 @@ import 'package:hive/hive.dart';
 import 'package:katchymemes/models/login_model.dart';
 import 'package:katchymemes/screens/auth_screens/login_screen.dart';
 import 'package:katchymemes/screens/home.dart';
-import 'package:katchymemes/screens/navigation_screens/home_screen.dart';
 import 'package:katchymemes/screens/splash_screen.dart';
 import 'package:path_provider/path_provider.dart' as path_provider;
 
