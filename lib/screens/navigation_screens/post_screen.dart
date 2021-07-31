@@ -46,8 +46,12 @@ class _PostScreenState extends State<PostScreen> {
                       primary: Colors.pink,
                     ),
                     onPressed: () {
-                      PostRepository _postRepo = new PostRepository();
-                      _postRepo.addPost(_image!);
+                      if (_image != null) {
+                        PostRepository _postRepo = new PostRepository();
+                        _postRepo.addPost(_image!);
+                      } else {
+                        print("Image is null.");
+                      }
                     },
                     child: Text("Share")),
               )

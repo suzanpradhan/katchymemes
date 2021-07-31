@@ -31,16 +31,21 @@ class PostRepository {
     }
   }
 
-  Future addPost(File _image) async {
+  Future addPost(
+      {required File image, String? username, String description = ""}) async {
     try {
       var dio = Dio();
       var apiUrl = ApiConstants.baseUrl + ApiConstants.postsPostUrl;
-      var formData = FormData.fromMap({
-        // 'format': 'json',
+      Map<String, dynamic> dataToUpload = {
         'key': ApiConstants.apiKey,
-        'source': await MultipartFile.fromFile(_image.path,
-            filename: _image.path.split('/').last),
-      });
+        'source': await MultipartFile.fromFile(image.path,
+            filename: image.path.split('/').last),
+        'description': description
+      };
+      if (username != null) {
+        dataToUpload["user"] = username;
+      }
+      var formData = FormData.fromMap(dataToUpload);
       var response = await dio.post(apiUrl, data: formData);
       if (response.statusCode == 200) {
         print("Posted successfully");
