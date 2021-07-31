@@ -18,7 +18,7 @@ class _PostScreenState extends State<PostScreen> {
     var _pickedImage = await _imagePicker.pickImage(source: source);
     setState(() {
       _image = File(_pickedImage!.path);
-    });
+    })
   }
 
   @override
