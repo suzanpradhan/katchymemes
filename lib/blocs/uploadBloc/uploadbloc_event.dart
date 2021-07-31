@@ -7,4 +7,12 @@ abstract class UploadblocEvent extends Equatable {
   List<Object> get props => [];
 }
 
-class RequestPostUpload extends UploadblocEvent {}
+class RequestPostUpload extends UploadblocEvent {
+  final String? username;
+  final String? description;
+  final File image;
+
+  RequestPostUpload({this.username, this.description, required this.image});
+}
+
+class PostSubmitted extends UploadblocEvent {}

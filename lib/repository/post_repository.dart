@@ -31,7 +31,7 @@ class PostRepository {
     }
   }
 
-  Future addPost(
+  Future<bool> addPost(
       {required File image, String? username, String description = ""}) async {
     try {
       var dio = Dio();
@@ -48,12 +48,12 @@ class PostRepository {
       var formData = FormData.fromMap(dataToUpload);
       var response = await dio.post(apiUrl, data: formData);
       if (response.statusCode == 200) {
-        print("Posted successfully");
+        return true;
       } else {
-        print(response.statusCode);
+        return Future.error("Memes Upload Failed.");
       }
     } catch (e) {
-      print(e.toString());
+      return Future.error("Memes Upload Failed.");
     }
   }
 }

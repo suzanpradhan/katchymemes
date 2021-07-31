@@ -68,9 +68,8 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   void addUser(Login login) {
-    Hive.box('login').add(login);
-    print(login.apikey);
-    print(login.username);
+    var box = Hive.box('login');
+    box.put(login.apikey, login.username);
   }
 
   @override

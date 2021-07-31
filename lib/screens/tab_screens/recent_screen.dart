@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hive/hive.dart';
 import 'package:katchymemes/blocs/recentMemes/recentmemes_bloc.dart';
 import 'package:katchymemes/models/posts_model.dart';
 import 'package:katchymemes/utils/contants/api_constants.dart';
