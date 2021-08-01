@@ -23,13 +23,29 @@ class _HomeState extends State<Home> {
   void initState() {
     super.initState();
     _navigationScreens = <Widget>[
-      HomeScreen(),
-      SearchScreen(),
-      PostScreen(),
-      NotificationScreen(),
-      ProfileScreen(),
+      HomeScreen(
+        navigator: pageNavigator,
+      ),
+      SearchScreen(
+        navigator: pageNavigator,
+      ),
+      PostScreen(
+        navigator: pageNavigator,
+      ),
+      NotificationScreen(
+        navigator: pageNavigator,
+      ),
+      ProfileScreen(
+        navigator: pageNavigator,
+      )
     ];
     this._currentIndex = 0;
+  }
+
+  void pageNavigator({required int index}) {
+    setState(() {
+      _currentIndex = index;
+    });
   }
 
   @override
@@ -38,7 +54,6 @@ class _HomeState extends State<Home> {
       providers: [
         BlocProvider(
           create: (_) => UploadblocBloc(),
-          child: PostScreen(),
         ),
       ],
       child: Scaffold(

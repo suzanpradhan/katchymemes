@@ -3,13 +3,13 @@ import 'package:flutter/material.dart';
 
 class CustomStack extends StatelessWidget {
   const CustomStack({
-    Key? key, 
-    this.top, 
-    this.left, 
-    this.right, 
-    this.bottom, 
-    this.onTap, 
-    this.imageUrl, 
+    Key? key,
+    this.top,
+    this.left,
+    this.right,
+    this.bottom,
+    this.onTap,
+    this.imageUrl,
     this.icon,
   }) : super(key: key);
 
@@ -25,29 +25,28 @@ class CustomStack extends StatelessWidget {
       children: [
         Container(
           width: size.width,
+          height: size.height * 0.6,
           child: Image(
             fit: BoxFit.cover,
-            image: NetworkImage(
-              imageUrl!
-            )
+            image: (imageUrl != "" && imageUrl != null)
+                ? NetworkImage(imageUrl!.toString())
+                : AssetImage("assets/images/no_profile.png") as ImageProvider,
           ),
         ),
         Positioned(
-          top: top,
-          left: left,
-          right: right,
-          bottom: bottom,
-          child: Container(
-            decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(10.0)
-            ),
-            child: IconButton(
-              icon: Icon(icon),
-              onPressed: onTap as void Function()?,
-            ),
-          )
-        )
+            top: top,
+            left: left,
+            right: right,
+            bottom: bottom,
+            child: Container(
+              decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(10.0)),
+              child: IconButton(
+                icon: Icon(icon),
+                onPressed: onTap as void Function()?,
+              ),
+            ))
       ],
     );
   }

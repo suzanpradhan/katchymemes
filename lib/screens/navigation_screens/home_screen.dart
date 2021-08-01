@@ -4,6 +4,8 @@ import 'package:katchymemes/screens/tab_screens/recent_screen.dart';
 import 'package:katchymemes/screens/tab_screens/trending_screen.dart';
 
 class HomeScreen extends StatefulWidget {
+  Function navigator;
+  HomeScreen({required this.navigator});
   @override
   _HomeScreenState createState() => _HomeScreenState();
 }

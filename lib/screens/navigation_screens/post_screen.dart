@@ -9,6 +9,8 @@ import 'package:katchymemes/blocs/uploadBloc/uploadbloc_bloc.dart';
 import 'package:katchymemes/repository/post_repository.dart';
 
 class PostScreen extends StatefulWidget {
+  Function navigator;
+  PostScreen({required this.navigator});
   @override
   _PostScreenState createState() => _PostScreenState();
 }
@@ -30,7 +32,7 @@ class _PostScreenState extends State<PostScreen> {
   void initState() {
     super.initState();
     var box = Hive.box('login');
-    username = box.values.elementAt(0);
+    username = box.values.elementAt(0).username;
   }
 
   @override
@@ -41,6 +43,7 @@ class _PostScreenState extends State<PostScreen> {
           print(state);
         } else if (state is UploadSuccess) {
           print(state);
+          widget.navigator(index: 0);
         } else if (state is UploadFailed) {
           ScaffoldMessenger.of(context).showSnackBar(SnackBar(
             content: Text(
@@ -81,7 +84,11 @@ class _PostScreenState extends State<PostScreen> {
                                 description: _postTextController.text,
                                 username: username));
                         },
-                        child: Text("Share")),
+                        child: (state is UploadSuccess)
+                            ? Text("Uploaded")
+                            : (state is UploadLoading)
+                                ? Text("Uploading")
+                                : Text("Share")),
                   )
                 ],
               ),
@@ -99,6 +106,7 @@ class _PostScreenState extends State<PostScreen> {
                           borderRadius: BorderRadius.circular(12),
                           color: Colors.white),
                       child: TextField(
+                        enabled: (state is UploadLoading) ? false : true,
                         keyboardType: TextInputType.multiline,
                         scrollPhysics: BouncingScrollPhysics(),
                         maxLines: null,
@@ -130,7 +138,9 @@ class _PostScreenState extends State<PostScreen> {
                                     color: Color(0xff707070),
                                   ),
                                   onPressed: () {
-                                    _pickImage(ImageSource.gallery);
+                                    if (state is! UploadLoading) {
+                                      _pickImage(ImageSource.gallery);
+                                    }
                                   }),
                               IconButton(
                                   icon: Icon(EvaIcons.video,

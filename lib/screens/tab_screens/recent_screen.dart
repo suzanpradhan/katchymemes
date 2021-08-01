@@ -74,7 +74,7 @@ class _RecentTabState extends State<RecentTab> {
                         context,
                         MaterialPageRoute(
                             builder: (context) =>
-                                DetailScreen(listOfPost[index])));
+                                DetailScreen(post: state.memesList[index])));
                   },
                 );
               },
