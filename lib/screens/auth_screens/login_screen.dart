@@ -38,7 +38,8 @@ class _LoginScreenState extends State<LoginScreen> {
     print(result);
 
     if (result["success"]["message"] == "success") {
-      addUser(Login(apiKey, username));
+      var userId = result["success"]["data"]["id"];
+      addUser(Login(apiKey, username, userId));
       Navigator.of(this.context).pushAndRemoveUntil(
           MaterialPageRoute(builder: (BuildContext context) => Home()),
           (Route<dynamic> route) => false);

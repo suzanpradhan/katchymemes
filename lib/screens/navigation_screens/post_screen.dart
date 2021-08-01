@@ -25,12 +25,14 @@ class _PostScreenState extends State<PostScreen> {
   }
 
   late final String username;
+  late final String userId;
 
   @override
   void initState() {
     super.initState();
     var box = Hive.box('login');
     username = box.values.elementAt(0);
+    userId = box.values.elementAt(1);
   }
 
   @override

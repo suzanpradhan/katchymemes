@@ -7,8 +7,11 @@ class Login {
   final String? apikey;
   @HiveField(1)
   final String? username;
+  @HiveField(2)
+  final String? userId;
   Login(
     this.apikey,
     this.username,
+    this.userId,
   );
 }
