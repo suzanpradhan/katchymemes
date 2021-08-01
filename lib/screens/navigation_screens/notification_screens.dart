@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:katchymemes/models/notifications.dart';
 
 class NotificationScreen extends StatefulWidget {
+      Function navigator;
+  NotificationScreen({required this.navigator});
   @override
   _NotificationScreenState createState() => _NotificationScreenState();
 }

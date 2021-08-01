@@ -6,6 +6,8 @@ import 'package:katchymemes/screens/profile_tab_screens/profile_post_screens.dar
 import 'package:katchymemes/screens/settings_screen.dart';
 
 class ProfileScreen extends StatefulWidget {
+  Function navigator;
+  ProfileScreen({required this.navigator});
   @override
   _ProfileScreenState createState() => _ProfileScreenState();
 }
