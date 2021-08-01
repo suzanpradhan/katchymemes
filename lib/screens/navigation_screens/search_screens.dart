@@ -2,6 +2,9 @@ import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';
 
 class SearchScreen extends StatefulWidget {
+   final Function navigator;
+  SearchScreen({required this.navigator});
+
   @override
   _SearchScreenState createState() => _SearchScreenState();
 }

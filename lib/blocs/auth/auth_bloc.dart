@@ -22,7 +22,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   Stream<AuthState> registerUser({required String email, required String password}) async* {
     try {
       yield RegistrationLoading();
-      UserCredential userCredential =
+      UserCredential userCredential = 
           await _firebaseAuthRepo.createAccountWithEmail(email, password);
       await _firebaseAuthRepo.signInAccountWithEmail(
           email: email, password: password);

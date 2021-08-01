@@ -2,6 +2,7 @@ import 'package:custom_navigation_bar/custom_navigation_bar.dart';
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:katchymemes/blocs/bloc/userdetail_bloc.dart';
 import 'package:katchymemes/blocs/uploadBloc/uploadbloc_bloc.dart';
 import 'package:katchymemes/screens/navigation_screens/home_screen.dart';
 import 'package:katchymemes/screens/navigation_screens/notification_screens.dart';
@@ -23,13 +24,29 @@ class _HomeState extends State<Home> {
   void initState() {
     super.initState();
     _navigationScreens = <Widget>[
-      HomeScreen(),
-      SearchScreen(),
-      PostScreen(),
-      NotificationScreen(),
-      ProfileScreen(),
+      HomeScreen(
+        navigator: pageNavigator,
+      ),
+      SearchScreen(
+        navigator: pageNavigator,
+      ),
+      PostScreen(
+        navigator: pageNavigator,
+      ),
+      NotificationScreen(
+        navigator: pageNavigator,
+      ),
+      ProfileScreen(
+        navigator: pageNavigator,
+      )
     ];
     this._currentIndex = 0;
+  }
+
+  void pageNavigator({required int index}) {
+    setState(() {
+      _currentIndex = index;
+    });
   }
 
   @override
@@ -38,8 +55,8 @@ class _HomeState extends State<Home> {
       providers: [
         BlocProvider(
           create: (_) => UploadblocBloc(),
-          child: PostScreen(),
         ),
+        BlocProvider(create: (_) => UserdetailBloc()),
       ],
       child: Scaffold(
           body: SafeArea(

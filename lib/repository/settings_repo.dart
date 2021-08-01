@@ -4,7 +4,7 @@ import 'package:katchymemes/screens/auth_screens/login_screen.dart';
 
 class SettingsRepo {
   logout(context) {
-    Hive.box('login').deleteFromDisk();
+    Hive.box('login').clear();
     Navigator.push(
         context, MaterialPageRoute(builder: (context) => LoginScreen()));
   }

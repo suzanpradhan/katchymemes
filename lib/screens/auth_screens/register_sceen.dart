@@ -1,9 +1,9 @@
 import 'dart:convert';
 
+import 'package:dio/dio.dart';
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:katchymemes/screens/auth_screens/login_screen.dart';
-import 'package:katchymemes/screens/home.dart';
 import 'package:katchymemes/utils/contants/api_constants.dart';
 import 'package:http/http.dart' as http;
 // import 'package:flutter_bloc/flutter_bloc.dart';
@@ -31,37 +31,48 @@ class _RegisterScreenState extends State<RegisterScreen> {
       setState(() {
         isFormActive = true;
       });
-      registerUser(_usernameController.text, _emailController.text,
-          _passwordController.text);
+      userRegister(
+          email: _emailController.text,
+          username: _usernameController.text,
+          password: _passwordController.text);
     }
   }
 
-  registerUser(
-    String username,
-    String email,
-    String password,
-  ) async {
-    var url = Uri.parse(ApiConstants.baseUrl + ApiConstants.registerUrl);
-    var response = await http.post(url,
-        headers: {
-          "Accept": "application/json",
-          "Content-Type": "application/x-www-form-urlencoded"
-        },
-        body: {
-          "key": ApiConstants.apiKey,
-          "username": username,
-          "password": password,
-          "email": email,
-        },
-        encoding: Encoding.getByName("utf-8"));
-
-    if (response.statusCode == 200) {
-      // Navigator.of(this.context).pushAndRemoveUntil(
-      //     MaterialPageRoute(builder: (BuildContext context) => Home()),
-      //     (Route<dynamic> route) => false);
-      print("${response.body}");
-    } else {
-      print(response.body);
+  Future userRegister(
+      {required String username,
+      required String email,
+      required String password}) async {
+    try {
+      var dio = Dio();
+      var apiUrl = ApiConstants.baseUrl + ApiConstants.registerUrl;
+      Map<String, dynamic> datatoUpload = {
+        'key': ApiConstants.apiKey,
+        'username': username,
+        'email': email,
+        'password': password
+      };
+      var formData = FormData.fromMap(datatoUpload);
+      var response = await dio.post(apiUrl, data: formData);
+      if (response.statusCode == 200) {
+        Navigator.push(
+            context, MaterialPageRoute(builder: (context) => LoginScreen()));
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+          content: Text(
+            "Status Code ${response.statusCode}",
+            style: TextStyle(color: Colors.white),
+          ),
+          backgroundColor: Colors.red,
+        ));
+      }
+    } catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        content: Text(
+          "Couldnot register",
+          style: TextStyle(color: Colors.white),
+        ),
+        backgroundColor: Colors.red,
+      ));
     }
   }
 

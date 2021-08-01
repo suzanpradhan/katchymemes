@@ -1,9 +1,7 @@
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:hive/hive.dart';
 import 'package:katchymemes/repository/settings_repo.dart';
-import 'package:katchymemes/screens/auth_screens/login_screen.dart';
 
 class Settings {
   final String settingTitle;

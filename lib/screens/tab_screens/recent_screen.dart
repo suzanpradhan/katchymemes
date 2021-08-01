@@ -1,13 +1,10 @@
-import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:hive/hive.dart';
 import 'package:katchymemes/blocs/recentMemes/recentmemes_bloc.dart';
 import 'package:katchymemes/models/posts_model.dart';
 import 'package:katchymemes/utils/contants/api_constants.dart';
 import 'package:katchymemes/widgets/post_card.dart';
-import 'package:http/http.dart' as http;
 import '../details_screen.dart';
 
 class RecentTab extends StatefulWidget {
@@ -53,7 +50,6 @@ class _RecentTabState extends State<RecentTab> {
       create: (context) => RecentmemesBloc()..add(RequestRecentMemes()),
       child: BlocConsumer<RecentmemesBloc, RecentmemesState>(
         listener: (context, state) {
-          // TODO: implement listener
         },
         builder: (context, state) {
           if (state is RecentMemesListLoaded) {
@@ -74,7 +70,7 @@ class _RecentTabState extends State<RecentTab> {
                         context,
                         MaterialPageRoute(
                             builder: (context) =>
-                                DetailScreen(listOfPost[index])));
+                                DetailScreen(post: state.memesList[index])));
                   },
                 );
               },

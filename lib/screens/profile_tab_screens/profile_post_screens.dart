@@ -1,7 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:katchymemes/models/posts_model.dart';
-import 'package:katchymemes/screens/details_screen.dart';
-import 'package:katchymemes/widgets/post_card.dart';
 
 class ProfilePostScreens extends StatefulWidget {
   @override

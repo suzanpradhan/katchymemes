@@ -39,7 +39,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
     if (result["success"]["message"] == "success") {
       var userId = result["success"]["data"]["id"];
-      addUser(Login(apiKey, username, userId));
+      addUser(login: Login(apiKey, username, userId));
       Navigator.of(this.context).pushAndRemoveUntil(
           MaterialPageRoute(builder: (BuildContext context) => Home()),
           (Route<dynamic> route) => false);
@@ -68,9 +68,9 @@ class _LoginScreenState extends State<LoginScreen> {
     });
   }
 
-  void addUser(Login login) {
+  void addUser({required Login login}) {
     var box = Hive.box('login');
-    box.put(login.apikey, login.username);
+    box.add(login);
   }
 
   @override
