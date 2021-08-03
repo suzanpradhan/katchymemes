@@ -21,9 +21,7 @@ class PostRepository {
 
       listOfPost = result.map((data) => Post.fromJson(data)).toList();
       var date = listOfPost[0].postedDate!.split(" ");
-      print(date);
       var sliceDate = date[0].replaceAll(RegExp(r'-'), '/');
-      print(sliceDate);
       return listOfPost;
     } catch (e) {
       return Future.error("Memes Load Failed.");
@@ -62,4 +60,6 @@ class PostRepository {
       return Future.error("Memes Upload Failed.3");
     }
   }
+
+  
 }

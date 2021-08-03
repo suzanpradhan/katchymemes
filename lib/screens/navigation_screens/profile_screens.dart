@@ -42,10 +42,11 @@ class _ProfileScreenState extends State<ProfileScreen>
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => UserdetailBloc()
+    return BlocProvider.value(
+      value: BlocProvider.of<UserdetailBloc>(context)
         ..add(
             UserDetailLoadBegin(Hive.box('login').values.elementAt(0).userId)),
+  
       child: BlocConsumer<UserdetailBloc, UserdetailState>(
         listener: (context, state) {},
         builder: (context, state) {
@@ -108,13 +109,16 @@ class _ProfileScreenState extends State<ProfileScreen>
                                           Padding(
                                             padding: const EdgeInsets.symmetric(
                                                 horizontal: 32),
-                                            child: Text(
-                                              "${state.data.bio}",
-                                              textAlign: TextAlign.center,
-                                              style: TextStyle(
-                                                  fontSize: 14,
-                                                  color: Color(0xff707070)),
-                                            ),
+                                            child: (state.data.bio != null)
+                                                ? Text(
+                                                    "${state.data.bio}",
+                                                    textAlign: TextAlign.center,
+                                                    style: TextStyle(
+                                                        fontSize: 14,
+                                                        color:
+                                                            Color(0xff707070)),
+                                                  )
+                                                : Text(""),
                                           ),
                                           SizedBox(
                                             height: 14,
@@ -165,11 +169,17 @@ class _ProfileScreenState extends State<ProfileScreen>
                           left: 0,
                           right: 0,
                           top: 212,
-                          child: CircleAvatar(
-                            backgroundImage: NetworkImage(
-                                "https://images.unsplash.com/photo-1511367461989-f85a21fda167?ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8cHJvZmlsZXxlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&w=1000&q=80"),
-                            radius: 48,
-                          )),
+                          child: (state.data.imageUrl != null)
+                              ? CircleAvatar(
+                                  backgroundImage:
+                                      NetworkImage("${state.data.imageUrl}"),
+                                  radius: 48,
+                                )
+                              : CircleAvatar(
+                                  backgroundImage: AssetImage(
+                                      "assets/images/no_profile.png"),
+                                  radius: 48,
+                                ))
                     ],
                   ),
                 ),

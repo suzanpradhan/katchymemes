@@ -8,7 +8,8 @@ class Post {
       userImage,
       postText,
       likesCount,
-      commentsCount;
+      commentsCount,
+      userId;
   List<Comments>? comments;
 
   Post({
@@ -20,23 +21,24 @@ class Post {
     this.postImage,
     this.postText,
     this.comments,
+    this.userId,
   });
 
   factory Post.fromJson(Map<String, dynamic> json) {
-    print(json["image_date"].toString() +
-        json["image_path"].toString() +
-        json['image_original_filename'].toString() +
-        "===" +
-        ApiConstants.imageUrl +
-        (json["image_date"] as String).split(" ")[0].replaceAll("-", "/") +
-        "/" +
-        ((json["image_path"] != null) ? json["image_path"] + "/" : "") +
-        json["image_name"] +
-        "." +
-        json["image_extension"]);
+    // print(json["image_date"].toString() +
+    //     json["image_path"].toString() +
+    //     json['image_original_filename'].toString() +
+    //     "===" +
+    //     ApiConstants.imageUrl +
+    //     (json["image_date"] as String).split(" ")[0].replaceAll("-", "/") +
+    //     "/" +
+    //     ((json["image_path"] != null) ? json["image_path"] + "/" : "") +
+    //     json["image_name"] +
+    //     "." +
+    //     json["image_extension"]);
     return Post(
-      username: (json['image_user_id'] != null)
-          ? json['image_user_id'].toString()
+      username: (json['user_username'] != null)
+          ? json['user_username'].toString()
           : "Guest",
       userImage: json['user_image'],
       postedDate: json['image_date'].toString(),
@@ -51,6 +53,7 @@ class Post {
           json["image_extension"],
       postText: json['image_name'].toString(),
       comments: json['comments'],
+      userId: json['image_user_id'].toString(),
     );
   }
 }

@@ -38,37 +38,27 @@ class _RegisterScreenState extends State<RegisterScreen> {
     }
   }
 
-  Future userRegister(
+  userRegister(
       {required String username,
       required String email,
       required String password}) async {
-    try {
-      var dio = Dio();
-      var apiUrl = ApiConstants.baseUrl + ApiConstants.registerUrl;
-      Map<String, dynamic> datatoUpload = {
-        'key': ApiConstants.apiKey,
-        'username': username,
-        'email': email,
-        'password': password
-      };
-      var formData = FormData.fromMap(datatoUpload);
-      var response = await dio.post(apiUrl, data: formData);
-      if (response.statusCode == 200) {
-        Navigator.push(
-            context, MaterialPageRoute(builder: (context) => LoginScreen()));
-      } else {
-        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-          content: Text(
-            "Status Code ${response.statusCode}",
-            style: TextStyle(color: Colors.white),
-          ),
-          backgroundColor: Colors.red,
-        ));
-      }
-    } catch (e) {
+    var dio = Dio();
+    var apiUrl = ApiConstants.baseUrl + ApiConstants.registerUrl;
+    Map<String, dynamic> datatoUpload = {
+      'key': ApiConstants.apiKey,
+      'username': username,
+      'email': email,
+      'password': password
+    };
+    var formData = FormData.fromMap(datatoUpload);
+    var response = await dio.post(apiUrl, data: formData);
+    if (response.statusCode == 200) {
+      Navigator.push(
+          context, MaterialPageRoute(builder: (context) => LoginScreen()));
+    } else {
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
         content: Text(
-          "Couldnot register",
+          "Status Code ${response.statusCode}",
           style: TextStyle(color: Colors.white),
         ),
         backgroundColor: Colors.red,

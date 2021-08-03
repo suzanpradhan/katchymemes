@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:katchymemes/blocs/recentMemes/recentmemes_bloc.dart';
@@ -6,6 +5,7 @@ import 'package:katchymemes/models/posts_model.dart';
 import 'package:katchymemes/utils/contants/api_constants.dart';
 import 'package:katchymemes/widgets/post_card.dart';
 import '../details_screen.dart';
+import 'package:share_plus/share_plus.dart';
 
 class RecentTab extends StatefulWidget {
   @override
@@ -49,30 +49,32 @@ class _RecentTabState extends State<RecentTab> {
     return BlocProvider(
       create: (context) => RecentmemesBloc()..add(RequestRecentMemes()),
       child: BlocConsumer<RecentmemesBloc, RecentmemesState>(
-        listener: (context, state) {
-        },
+        listener: (context, state) {},
         builder: (context, state) {
           if (state is RecentMemesListLoaded) {
             return ListView.builder(
               physics: BouncingScrollPhysics(),
               itemCount: state.memesList.length,
               itemBuilder: (context, index) {
-                print(state.memesList[index].userImage);
                 return PostCard(
-                  username: state.memesList[index].username,
-                  userImage: state.memesList[index].userImage,
-                  time: state.memesList[index].postedDate,
-                  imageUrl: state.memesList[index].postImage,
-                  likeCount: state.memesList[index].likesCount,
-                  commentCount: state.memesList[index].commentsCount,
-                  onPress: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) =>
-                                DetailScreen(post: state.memesList[index])));
-                  },
-                );
+                    username: state.memesList[index].username,
+                    userImage: state.memesList[index].userImage,
+                    time: state.memesList[index].postedDate,
+                    imageUrl: state.memesList[index].postImage,
+                    likeCount: state.memesList[index].likesCount,
+                    commentCount: state.memesList[index].commentsCount,
+                    onPress: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) =>
+                                  DetailScreen(post: state.memesList[index])));
+                    },
+                    onShare: () {
+                      String text = state.memesList[index].postImage!;
+                      String subject = 'Share';
+                      Share.share(text, subject: subject);
+                    });
               },
             );
           } else if (state is RecentMemesListLoadFailed) {

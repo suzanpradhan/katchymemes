@@ -58,28 +58,33 @@ class _HomeState extends State<Home> {
         ),
         BlocProvider(create: (_) => UserdetailBloc()),
       ],
-      child: Scaffold(
-          body: SafeArea(
-            child: _navigationScreens[_currentIndex],
-            bottom: false,
-          ),
-          bottomNavigationBar: CustomNavigationBar(
-            currentIndex: _currentIndex,
-            selectedColor: Colors.pink,
-            unSelectedColor: Colors.grey,
-            onTap: (int index) {
-              setState(() {
-                _currentIndex = index;
-              });
-            },
-            items: [
-              CustomNavigationBarItem(icon: Icon(EvaIcons.homeOutline)),
-              CustomNavigationBarItem(icon: Icon(EvaIcons.searchOutline)),
-              CustomNavigationBarItem(icon: Icon(EvaIcons.plusCircleOutline)),
-              CustomNavigationBarItem(icon: Icon(EvaIcons.bellOutline)),
-              CustomNavigationBarItem(icon: Icon(EvaIcons.personOutline)),
-            ],
-          )),
+      child: BlocBuilder<UserdetailBloc, UserdetailState>(
+        builder: (context, state) {
+          return Scaffold(
+              body: SafeArea(
+                child: _navigationScreens[_currentIndex],
+                bottom: false,
+              ),
+              bottomNavigationBar: CustomNavigationBar(
+                currentIndex: _currentIndex,
+                selectedColor: Colors.pink,
+                unSelectedColor: Colors.grey,
+                onTap: (int index) {
+                  setState(() {
+                    _currentIndex = index;
+                  });
+                },
+                items: [
+                  CustomNavigationBarItem(icon: Icon(EvaIcons.homeOutline)),
+                  CustomNavigationBarItem(icon: Icon(EvaIcons.searchOutline)),
+                  CustomNavigationBarItem(
+                      icon: Icon(EvaIcons.plusCircleOutline)),
+                  CustomNavigationBarItem(icon: Icon(EvaIcons.bellOutline)),
+                  CustomNavigationBarItem(icon: Icon(EvaIcons.personOutline)),
+                ],
+              ));
+        },
+      ),
     );
   }
 }

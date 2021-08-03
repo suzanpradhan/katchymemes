@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:katchymemes/models/posts_model.dart';
 import 'package:katchymemes/models/user_model.dart';
 import 'package:katchymemes/repository/user_repository.dart';
 
@@ -30,4 +31,5 @@ class UserdetailBloc extends Bloc<UserdetailEvent, UserdetailState> {
       yield UserDetailLoadFailed(message: e.toString());
     }
   }
+
 }

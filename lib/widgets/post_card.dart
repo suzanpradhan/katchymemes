@@ -11,10 +11,11 @@ class PostCard extends StatelessWidget {
     this.commentCount,
     this.userImage,
     this.onPress,
+    this.onShare,
   }) : super(key: key);
 
   final String? username, time, imageUrl, userImage, likeCount, commentCount;
-  final Function? onPress;
+  final Function? onPress, onShare;
 
   @override
   Widget build(BuildContext context) {
@@ -118,18 +119,9 @@ class PostCard extends StatelessWidget {
                     child: Row(
                       children: [
                         IconButton(
-                            icon: Icon(EvaIcons.shareOutline),
-                            onPressed: () {
-                              print("write share function");
-                            }),
-                        Text(
-                          "$likeCount",
-                          textAlign: TextAlign.start,
-                          style: TextStyle(
-                              color: Colors.grey,
-                              fontSize: 12.0,
-                              fontWeight: FontWeight.normal),
-                        ),
+                          icon: Icon(EvaIcons.shareOutline),
+                          onPressed: onShare as void Function(),
+                        )
                       ],
                     ),
                   ),
