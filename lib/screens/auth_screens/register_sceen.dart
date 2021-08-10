@@ -1,11 +1,8 @@
-import 'dart:convert';
-
 import 'package:dio/dio.dart';
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:katchymemes/screens/auth_screens/login_screen.dart';
 import 'package:katchymemes/utils/contants/api_constants.dart';
-import 'package:http/http.dart' as http;
 // import 'package:flutter_bloc/flutter_bloc.dart';
 // import 'package:katchymemes/blocs/auth/auth_bloc.dart';
 

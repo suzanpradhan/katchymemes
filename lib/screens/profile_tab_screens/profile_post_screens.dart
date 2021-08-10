@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive/hive.dart';
-import 'package:katchymemes/blocs/bloc/userdetail_bloc.dart';
 import 'package:katchymemes/blocs/userPosts/bloc/userposts_bloc.dart';
 import 'package:katchymemes/screens/details_screen.dart';
 import 'package:katchymemes/widgets/post_card.dart';

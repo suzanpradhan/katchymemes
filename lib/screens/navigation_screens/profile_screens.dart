@@ -46,13 +46,13 @@ class _ProfileScreenState extends State<ProfileScreen>
       value: BlocProvider.of<UserdetailBloc>(context)
         ..add(
             UserDetailLoadBegin(Hive.box('login').values.elementAt(0).userId)),
-  
       child: BlocConsumer<UserdetailBloc, UserdetailState>(
         listener: (context, state) {},
         builder: (context, state) {
           if (state is UserDetailLoading) {
             return Center(child: CircularProgressIndicator());
           } else if (state is UserDetailLoadSucces) {
+            print(state.data.imageUrl.toString());
             return Stack(
               children: [
                 Column(
@@ -169,17 +169,24 @@ class _ProfileScreenState extends State<ProfileScreen>
                           left: 0,
                           right: 0,
                           top: 212,
-                          child: (state.data.imageUrl != null)
-                              ? CircleAvatar(
-                                  backgroundImage:
-                                      NetworkImage("${state.data.imageUrl}"),
-                                  radius: 48,
-                                )
-                              : CircleAvatar(
-                                  backgroundImage: AssetImage(
-                                      "assets/images/no_profile.png"),
-                                  radius: 48,
-                                ))
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Container(
+                                  width: 84,
+                                  height: 84,
+                                  decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(99),
+                                      image: DecorationImage(
+                                          fit: BoxFit.cover,
+                                          image: (state.data.imageUrl != null)
+                                              ? NetworkImage(
+                                                  state.data.imageUrl!)
+                                              : AssetImage(
+                                                      "assets/images/no_profile.png")
+                                                  as ImageProvider))),
+                            ],
+                          ))
                     ],
                   ),
                 ),
